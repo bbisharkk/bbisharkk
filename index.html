@@ -5,27 +5,46 @@
   <title>Thông báo mất thẻ ProID</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --bg: #ffffff;
+      --text: #333;
+      --accent: #2a9d8f;
+      --highlight: #264653;
+      --card: #f0f4f8;
+      --border: #ccc;
+    }
+
+    body.dark {
+      --bg: #121212;
+      --text: #eee;
+      --accent: #00b894;
+      --highlight: #74b9ff;
+      --card: #1e1e1e;
+      --border: #444;
+    }
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
+      background: var(--bg);
+      color: var(--text);
       font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(to right, #f1f1f1, #e0f7fa);
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      color: #333;
+      transition: background 0.3s, color 0.3s;
     }
 
     .card {
-      background: #fff;
+      background: var(--card);
       padding: 30px 40px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
+      max-width: 520px;
       width: 100%;
       text-align: center;
     }
@@ -33,7 +52,6 @@
     h1 {
       color: #d62828;
       font-size: 26px;
-      margin-bottom: 10px;
     }
 
     p {
@@ -44,17 +62,18 @@
     .highlight {
       font-weight: bold;
       font-size: 18px;
-      color: #264653;
+      color: var(--highlight);
       margin: 20px 0 10px;
     }
 
     .info-box {
-      background-color: #f0f4f8;
-      border-left: 5px solid #2a9d8f;
+      background-color: var(--card);
+      border-left: 5px solid var(--accent);
       padding: 15px 20px;
       border-radius: 10px;
       text-align: left;
       margin: 20px 0;
+      border: 1px solid var(--border);
     }
 
     .info-box p {
@@ -62,7 +81,7 @@
     }
 
     .thank-you {
-      color: #2a9d8f;
+      color: var(--accent);
       font-weight: bold;
       font-size: 16px;
       margin-top: 20px;
@@ -95,6 +114,14 @@
       background-color: #023e8a;
     }
 
+    .download {
+      background-color: #6c5ce7;
+    }
+
+    .download:hover {
+      background-color: #4834d4;
+    }
+
     .qr-section {
       margin-top: 25px;
     }
@@ -102,8 +129,16 @@
     .qr-section img {
       width: 120px;
       margin: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border);
       border-radius: 10px;
+    }
+
+    .toggle-mode {
+      margin-top: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--accent);
+      text-decoration: underline;
     }
 
     @media screen and (max-width: 500px) {
@@ -114,7 +149,7 @@
   </style>
 </head>
 <body>
-  <div class="card">
+  <div class="card" id="content">
     <h1>📢 THÔNG BÁO / NOTICE</h1>
     <p class="highlight">
       Tôi đã làm rơi một <strong>thẻ ProID</strong><br />
@@ -134,15 +169,19 @@
     <div class="buttons">
       <a class="call" href="tel:0394454056">📞 Gọi ngay</a>
       <a class="email" href="mailto:vanwthanhh47@gmail.com">✉️ Gửi email</a>
+      <a class="download" href="#" onclick="downloadPDF()">📄 Tải PDF</a>
     </div>
 
     <div class="qr-section">
-      <p><strong>🔗 Quét để liên hệ nhanh / Scan to contact:</strong></p>
+      <p><strong>🔗 Quét để liên hệ / Scan to contact:</strong></p>
       <a href="https://zalo.me/0394454056" target="_blank">
         <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://zalo.me/0394454056&size=120x120" alt="QR Zalo">
       </a>
       <a href="https://www.facebook.com/tochaocaunha" target="_blank">
         <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://www.facebook.com/tochaocaunha&size=120x120" alt="QR Facebook">
+      </a>
+      <a href="#" target="_blank">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=BEGIN:VCARD%0AVERSION:3.0%0AN:Thành;Trần Văn;;;%0AFN:Trần Văn Thành%0ATEL:0394454056%0AEMAIL:vanwthanhh47@gmail.com%0AEND:VCARD&size=120x120" alt="vCard QR">
       </a>
     </div>
 
@@ -150,6 +189,23 @@
       Xin chân thành cảm ơn!<br />
       Thank you very much!
     </p>
+
+    <div class="toggle-mode" onclick="toggleDarkMode()">🌙 Đổi chế độ tối / Toggle dark mode</div>
   </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+
+    function downloadPDF() {
+      const printContents = document.getElementById("content").innerHTML;
+      const original = document.body.innerHTML;
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = original;
+      location.reload();
+    }
+  </script>
 </body>
 </html>
