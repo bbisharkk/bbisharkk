@@ -2,195 +2,207 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>Thông báo mất thẻ ProID</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thông báo mất thẻ ProID</title>
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #333;
-      --accent: #2a9d8f;
-      --highlight: #264653;
-      --card: #f0f4f8;
-      --border: #ccc;
+      --bg: #f2f6ff;
+      --text: #2c3e50;
+      --card: #ffffff;
+      --border: #dcdde1;
+      --accent: #009688;
+      --button: #2980b9;
+      --button-text: #ffffff;
     }
 
     body.dark {
       --bg: #121212;
-      --text: #eee;
-      --accent: #00b894;
-      --highlight: #74b9ff;
+      --text: #ecf0f1;
       --card: #1e1e1e;
-      --border: #444;
-    }
-
-    * {
-      box-sizing: border-box;
+      --border: #555;
+      --accent: #00cec9;
+      --button: #6c5ce7;
     }
 
     body {
       margin: 0;
+      font-family: 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--text);
-      font-family: 'Segoe UI', Tahoma, sans-serif;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
-      transition: background 0.3s, color 0.3s;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    .card {
+    .container {
       background: var(--card);
-      padding: 30px 40px;
+      padding: 30px;
       border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      max-width: 520px;
-      width: 100%;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+      max-width: 640px;
+      width: 95%;
       text-align: center;
+      border: 1px solid var(--border);
     }
 
     h1 {
-      color: #d62828;
+      color: var(--accent);
       font-size: 26px;
     }
 
-    p {
-      font-size: 16px;
-      line-height: 1.6;
+    .tagline {
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text);
     }
 
-    .highlight {
-      font-weight: bold;
-      font-size: 18px;
-      color: var(--highlight);
-      margin: 20px 0 10px;
-    }
-
-    .info-box {
-      background-color: var(--card);
-      border-left: 5px solid var(--accent);
-      padding: 15px 20px;
-      border-radius: 10px;
-      text-align: left;
+    .info {
       margin: 20px 0;
+      text-align: left;
+    }
+
+    .info p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .card-photo img {
+      width: 100%;
+      border-radius: 12px;
+      max-height: 250px;
+      object-fit: cover;
       border: 1px solid var(--border);
     }
 
-    .info-box p {
-      margin: 6px 0;
+    .qr-codes, .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
     }
 
-    .thank-you {
-      color: var(--accent);
-      font-weight: bold;
-      font-size: 16px;
+    .qr-codes img {
+      width: 110px;
+      height: 110px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .map-box iframe {
+      width: 100%;
+      height: 220px;
+      border: 0;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    .buttons, .response-form {
       margin-top: 20px;
     }
 
-    .buttons a {
+    .buttons a, .buttons button {
       display: inline-block;
-      margin: 10px 5px;
-      padding: 10px 15px;
+      margin: 5px;
+      padding: 10px 20px;
+      background: var(--button);
+      color: var(--button-text);
+      border: none;
       border-radius: 8px;
-      text-decoration: none;
-      color: white;
       font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
       transition: background 0.3s;
     }
 
-    .call {
-      background-color: #38b000;
-    }
-
-    .call:hover {
-      background-color: #2a7f00;
-    }
-
-    .email {
-      background-color: #0077b6;
-    }
-
-    .email:hover {
-      background-color: #023e8a;
-    }
-
-    .download {
-      background-color: #6c5ce7;
-    }
-
-    .download:hover {
-      background-color: #4834d4;
-    }
-
-    .qr-section {
-      margin-top: 25px;
-    }
-
-    .qr-section img {
-      width: 120px;
-      margin: 10px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-
-    .toggle-mode {
+    .dark-toggle {
       margin-top: 10px;
-      font-size: 14px;
       cursor: pointer;
       color: var(--accent);
+      font-size: 14px;
       text-decoration: underline;
     }
 
-    @media screen and (max-width: 500px) {
-      .card {
-        padding: 20px;
-      }
+    .thank {
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 16px;
+      color: var(--accent);
+    }
+
+    .response-form form {
+      margin-top: 20px;
+    }
+
+    .response-form iframe {
+      width: 100%;
+      height: 480px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .timestamp {
+      font-size: 13px;
+      margin-top: 10px;
+      color: gray;
     }
   </style>
 </head>
 <body>
-  <div class="card" id="content">
-    <h1>📢 THÔNG BÁO / NOTICE</h1>
-    <p class="highlight">
-      Tôi đã làm rơi một <strong>thẻ ProID</strong><br />
-      I have lost my <strong>ProID card</strong>
-    </p>
-    <p>
-      Nếu bạn nhặt được thẻ, xin vui lòng liên hệ:<br />
-      If you find it, kindly contact:
-    </p>
+  <div class="container" id="content">
+    <h1>🚨 MẤT THẺ PROID</h1>
+    <div class="tagline">Lost ProID Card – Need Your Help</div>
 
-    <div class="info-box">
-      <p><strong>👤 Họ tên / Name:</strong> TRẦN VĂN THÀNH</p>
+    <div class="card-photo">
+      <img src="https://i.imgur.com/XyYQw5A.jpg" alt="Ảnh thẻ bị mất">
+    </div>
+
+    <div class="info">
+      <p><strong>👤 Tên / Name:</strong> Trần Văn Thành</p>
       <p><strong>📞 SĐT / Phone:</strong> <a href="tel:0394454056">0394454056</a></p>
-      <p><strong>✉️ Email:</strong> <a href="mailto:vanwthanhh47@gmail.com">vanwthanhh47@gmail.com</a></p>
+      <p><strong>📧 Email:</strong> <a href="mailto:vanwthanhh47@gmail.com">vanwthanhh47@gmail.com</a></p>
+      <p><strong>🕒 Thời gian mất:</strong> 12/04/2025 - khoảng 19h30</p>
+    </div>
+
+    <div class="qr-codes">
+      <a href="https://zalo.me/0394454056" target="_blank">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://zalo.me/0394454056&size=120x120" alt="Zalo">
+      </a>
+      <a href="https://www.facebook.com/tochaocaunha" target="_blank">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://www.facebook.com/tochaocaunha&size=120x120" alt="Facebook">
+      </a>
+      <a href="#">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=BEGIN:VCARD%0AVERSION:3.0%0AN:Thành;Trần Văn;;; %0AFN:Trần Văn Thành%0ATEL:0394454056%0AEMAIL:vanwthanhh47@gmail.com%0AEND:VCARD&size=120x120" alt="vCard">
+      </a>
+    </div>
+
+    <div class="map-box">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4757817285414!2d106.6903941750416!3d10.774082889376404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1c195cdb3b%3A0x68817f4f24fef9c!2zQ29uZyB2acOqbiBUYW8gxJBhbg!5e0!3m2!1svi!2s!4v1681800000000"
+        allowfullscreen="" loading="lazy"></iframe>
     </div>
 
     <div class="buttons">
-      <a class="call" href="tel:0394454056">📞 Gọi ngay</a>
-      <a class="email" href="mailto:vanwthanhh47@gmail.com">✉️ Gửi email</a>
-      <a class="download" href="#" onclick="downloadPDF()">📄 Tải PDF</a>
+      <a href="tel:0394454056">📞 Gọi ngay</a>
+      <a href="mailto:vanwthanhh47@gmail.com">📧 Gửi Email</a>
+      <button onclick="downloadPDF()">📄 Tải PDF</button>
     </div>
 
-    <div class="qr-section">
-      <p><strong>🔗 Quét để liên hệ / Scan to contact:</strong></p>
-      <a href="https://zalo.me/0394454056" target="_blank">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://zalo.me/0394454056&size=120x120" alt="QR Zalo">
-      </a>
-      <a href="https://www.facebook.com/tochaocaunha" target="_blank">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://www.facebook.com/tochaocaunha&size=120x120" alt="QR Facebook">
-      </a>
-      <a href="#" target="_blank">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?data=BEGIN:VCARD%0AVERSION:3.0%0AN:Thành;Trần Văn;;;%0AFN:Trần Văn Thành%0ATEL:0394454056%0AEMAIL:vanwthanhh47@gmail.com%0AEND:VCARD&size=120x120" alt="vCard QR">
-      </a>
+    <div class="share-buttons">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://zalo.me/0394454056" target="_blank">🔗 Chia sẻ Facebook</a>
+      <a href="https://zalo.me/share?url=https://zalo.me/0394454056" target="_blank">📤 Chia sẻ Zalo</a>
     </div>
 
-    <p class="thank-you">
-      Xin chân thành cảm ơn!<br />
-      Thank you very much!
-    </p>
+    <div class="response-form">
+      <h3>📬 Tôi đã nhặt được thẻ này?</h3>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdFakeGoogleFormLink/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
+    </div>
 
-    <div class="toggle-mode" onclick="toggleDarkMode()">🌙 Đổi chế độ tối / Toggle dark mode</div>
+    <div class="thank">Xin chân thành cảm ơn!<br />Thank you very much!</div>
+    <div class="timestamp" id="timestamp"></div>
+    <div class="dark-toggle" onclick="toggleDarkMode()">🌗 Chuyển chế độ sáng/tối</div>
   </div>
 
   <script>
@@ -206,6 +218,14 @@
       document.body.innerHTML = original;
       location.reload();
     }
+
+    function updateTimestamp() {
+      const now = new Date();
+      const timestamp = now.toLocaleString("vi-VN", { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      document.getElementById("timestamp").textContent = "⏱ Cập nhật lúc: " + timestamp;
+    }
+
+    updateTimestamp();
   </script>
 </body>
 </html>
